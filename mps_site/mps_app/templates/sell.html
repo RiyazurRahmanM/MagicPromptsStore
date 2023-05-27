@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Sell</h1>
+    <form method="POST">
+        {% csrf_token %}
+        Title: <input name="title" type="text" maxlength="50"><br>
+        Description: <input name="description" type="text" maxlength="500"><br>
+        Number Of Prompts: <input name="no_of_prompts" id="no_of_prompts_input" type="number"><br>
+        <span id="no_of_prompts_warning" style="color: red; display: none;">Maximum limit of prompts is 10</span><br>
+        <input id="next_button" type="submit" value="Next">
+    </form>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const noOfPromptsInput = document.getElementById('no_of_prompts_input');
+            const warningMessage = document.getElementById('no_of_prompts_warning');
+            const nextButton = document.getElementById('next_button');
+    
+            noOfPromptsInput.addEventListener('input', function() {
+                const inputValue = parseInt(noOfPromptsInput.value);
+                if (inputValue > 10) {
+                    warningMessage.style.display = 'inline';
+                    nextButton.disabled = true;
+                } else {
+                    warningMessage.style.display = 'none';
+                    nextButton.disabled = false;
+                }
+            });
+        });
+    </script>
+    
+</html>

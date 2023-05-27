@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <form method="POST">
+    {% csrf_token %}
+    <div id="myForm">
+
+    </div>
+    <input type="submit" value="submit">
+  </form>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+  
+    // Get the value of 'no_of_prompts' parameter
+    const noOfPrompts = urlParams.get('no_of_prompts');
+  
+    // Convert the value to a number
+    const noOfPromptsNumber = parseInt(noOfPrompts);
+  
+    // Get the form element
+    const form = document.getElementById('myForm');
+  
+    // Create inputs dynamically
+    for (let i = 0; i < noOfPromptsNumber; i++) {
+      const label = document.createElement('label');
+      label.textContent = `Prompt ${i + 1}: `;
+      form.appendChild(label);
+  
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = `prompt${i + 1}`;
+      form.appendChild(input);
+
+      const breakline = document.createElement('br');
+      form.appendChild(breakline);
+      const sample_op_label = document.createElement('label');
+      sample_op_label.textContent = `Sample Output for Prompt ${i+1}`;
+      form.appendChild(sample_op_label);
+
+
+      const sample_op_input = document.createElement('input');
+      sample_op_input.type = 'text';
+      sample_op_input.name = `sample_op_input${i+1}`;
+      form.appendChild(sample_op_input);
+  
+      form.appendChild(document.createElement('br'));
+    }
+  });
+</script>
+
+</html>
